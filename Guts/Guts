@@ -17,7 +17,7 @@ reproducir_anime_capitulo() {
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
     sleep 10
     rm -rf /tmp/jkanime.bz > /dev/null
-    mpv "$url" > /dev/null
+    mpv --referrer="https://jkanime.bz" "$url" 2>/dev/null
     capitulo=$((capitulo+1))
     clear
     printf "Introduce 's' para ver el capítulo %s (cualquier otro valor para pasar): " $capitulo
