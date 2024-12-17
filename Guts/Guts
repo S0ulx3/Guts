@@ -7,15 +7,10 @@
 reproducir_anime_capitulo() {
   anime=$1
   capitulo=$2
-  clear
-  echo $anime
-  echo $capitulo
-  sleep 5
   while [ "$respuesta" = "s" ] ;do
     envio="https://jkanime.bz/$anime/$capitulo"
     wget -p  $envio -P /tmp > /dev/null 2>&1
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
-    sleep 10
     rm -rf /tmp/jkanime.bz > /dev/null
     mpv --referrer="https://jkanime.bz" "$url" 2>/dev/null
     capitulo=$((capitulo+1))
@@ -36,14 +31,10 @@ descargar_anime_capitulo() {
   anime=$1
   capitulo=$2
   clear
-  echo $anime
-  echo $capitulo
-  sleep 5
   while [ "$respuesta" = "s" ] ;do
     envio="https://jkanime.bz/$anime/$capitulo"
     wget -p  $envio -P /tmp > /dev/null 2>&1
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
-    sleep 10
     rm -rf /tmp/jkanime.bz > /dev/null
     echo $url
     ffmpeg  -i "$url" -codec copy "$HOME/Guts/$anime-$capitulo.mp4"
